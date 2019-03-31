@@ -1,0 +1,62 @@
+[
+  {
+    "typeFruit": "STRAWBERRY",
+    "shelfLife": 2,
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "day": 10
+    },
+    "price": 45
+  },
+  {
+    "typeFruit": "BANANA",
+    "shelfLife": 2,
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "day": 10
+    },
+    "price": 30
+  },
+  {
+    "typeFruit": "APRICOT",
+    "shelfLife": 2,
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "day": 10
+    },
+    "price": 55
+  },
+  {
+    "typeFruit": "PLUM",
+    "shelfLife": 4,
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "day": 10
+    },
+    "price": 67
+  },
+  {
+    "typeFruit": "BANANA",
+    "shelfLife": 2,
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "day": 10
+    },
+    "price": 47
+  },
+  {
+    "typeFruit": "LEMON",
+    "shelfLife": 10,
+    "date": {
+      "year": 2019,
+      "month": 3,
+      "day": 10
+    },
+    "price": 30
+  }
+]
