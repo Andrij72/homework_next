@@ -30,28 +30,20 @@ public class TradeShop {
     }
 
     public List <Fruit> getSpoiledFruits (LocalDate date) {
-        List <Fruit> listOfSpoiledFruits = fruits.stream().filter(fruit -> isSpoiled(fruit, date))
-                .collect(Collectors.toList());
-        return listOfSpoiledFruits;
+        return fruits.stream().filter(fruit -> isSpoiled(fruit, date)).collect(Collectors.toList());
     }
 
     public List <Fruit> getAvailableFruits (LocalDate date) {
-        List <Fruit> listOfAvailableFruits = fruits.stream().filter(fruit -> !isSpoiled(fruit, date))
-                .collect(Collectors.toList());
-        return listOfAvailableFruits;
+        return fruits.stream().filter(fruit -> !isSpoiled(fruit, date)).collect(Collectors.toList());
     }
 
     public List <Fruit> getSpoiledFruits (LocalDate date, TypeFruit type) {
-        List <Fruit> listOfSpoiledFruits = fruits.stream()
-                .filter(fruit -> fruit.getTypeFruit().equals(type)).filter(fruit -> isSpoiled(fruit, date))
-                .collect(Collectors.toList());
-        return listOfSpoiledFruits;
+        return  fruits.stream().filter(fruit -> isSpoiled(fruit, date)).collect(Collectors.toList());
     }
 
     public List <Fruit> getAvailableFruits (LocalDate date, TypeFruit type) {
-        List <Fruit> listOfAvailableFruits = fruits.stream().filter(fruit -> fruit.getTypeFruit().equals(type))
-                .filter(fruit -> !isSpoiled(fruit, date)).collect(Collectors.toList());
-        return listOfAvailableFruits;
+        return    fruits.stream().filter(fruit -> fruit.getTypeFruit().equals(type)).filter(fruit ->
+                !isSpoiled(fruit, date)).collect(Collectors.toList());
     }
 
     public List <Fruit> getAddedFruits (LocalDate date) {

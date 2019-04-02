@@ -10,35 +10,33 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class TradeShopTest {
-    private List<Fruit> listFruits1;
-    private List<Fruit> listFruits2;
-    private TradeShop tradeShop;
     private static final String FIRST_FILE = "1stFile.json";
     private static final String SECOND_FILE = "2ndFile.json";
     private static final String DB_FILE = "DbFile.json";
+
+    private List<Fruit> listFruits1;
+    private List<Fruit> listFruits2;
+    private TradeShop tradeShop;
 
     @Before
     public void setUp() {
         tradeShop = new TradeShop();
         listFruits1 = new ArrayList<>();
         listFruits2 = new ArrayList<>();
-        LocalDate firstDate = LocalDate.of(2019, 3, 10);
+        LocalDate firstDate = LocalDate.of(2019, 3, 25);
         LocalDate secondDate = LocalDate.of(2019, 4, 20);
-
         listFruits1.add(new Fruit(TypeFruit.STRAWBERRY, 2, firstDate, 45));
         listFruits1.add(new Fruit(TypeFruit.BANANA, 2, firstDate, 30));
-        listFruits1.add(new Fruit(TypeFruit.APRICOT, 2, firstDate, 55));
+        listFruits1.add(new Fruit(TypeFruit.APRICOT, 4, firstDate, 55));
         listFruits1.add(new Fruit(TypeFruit.PLUM, 4, firstDate, 67));
-        listFruits1.add(new Fruit(TypeFruit.BANANA, 2, firstDate, 47));
+        listFruits1.add(new Fruit(TypeFruit.PEAR, 4, firstDate, 47));
         listFruits1.add(new Fruit(TypeFruit.LEMON, 10, firstDate, 30));
-
         FileContent.writeToFile(listFruits1, FIRST_FILE);
-
         listFruits2.add(new Fruit(TypeFruit.APPLE, 12, secondDate, 25));
         listFruits2.add(new Fruit(TypeFruit.PEACH, 8, secondDate, 20));
         listFruits2.add(new Fruit(TypeFruit.STRAWBERRY, 3, secondDate, 85));
         listFruits2.add(new Fruit(TypeFruit.GRAPES, 4, secondDate, 55));
-        listFruits2.add(new Fruit(TypeFruit.RUSPBERRY, 6, secondDate, 60));
+        listFruits2.add(new Fruit(TypeFruit.CHERRY, 6, secondDate, 60));
         FileContent.writeToFile(listFruits2, SECOND_FILE);
     }
 
@@ -66,22 +64,21 @@ public class TradeShopTest {
     @Test
     public void testGetSpoiledFruits() {
         tradeShop.addFruits(FIRST_FILE);
-        LocalDate date = LocalDate.of(2019, 2, 1);
+        LocalDate date = LocalDate.of(2019, 3, 28);
         List<Fruit> spoiledFruits = tradeShop.getSpoiledFruits(date);
-        assertEquals(2, spoiledFruits.size());
-        assertEquals(listFruits1.get(2), spoiledFruits.get(0));
+        assertEquals(4, spoiledFruits.size());
+        assertEquals(listFruits1.get(3), spoiledFruits.get(0));
         assertEquals(listFruits1.get(4), spoiledFruits.get(1));
     }
 
     @Test
     public void testGetAvailableFruits() {
         tradeShop.addFruits(FIRST_FILE);
-        LocalDate date = LocalDate.of(2019, 4, 1);
+        LocalDate date = LocalDate.of(2019, 3, 28);
         List<Fruit> availableFruits = tradeShop.getAvailableFruits(date);
-        assertEquals(3, availableFruits.size());
+        assertEquals(2, availableFruits.size());
         assertEquals(availableFruits.get(0), listFruits1.get(0));
         assertEquals(availableFruits.get(1), listFruits1.get(1));
-        assertEquals(availableFruits.get(2), listFruits1.get(3));
     }
 
     @Test
@@ -98,9 +95,8 @@ public class TradeShopTest {
         tradeShop.addFruits(FIRST_FILE);
         LocalDate date = LocalDate.of(2019, 4, 1);
         List<Fruit> availableFruits = tradeShop.getAvailableFruits(date, TypeFruit.BANANA);
-        assertEquals(2, availableFruits.size());
+        assertEquals(1, availableFruits.size());
         assertEquals(availableFruits.get(0), listFruits1.get(1));
-        assertEquals(availableFruits.get(1), listFruits1.get(3));
     }
 
     @Test
@@ -108,7 +104,7 @@ public class TradeShopTest {
         tradeShop.addFruits(FIRST_FILE);
         tradeShop.addFruits(SECOND_FILE);
         tradeShop.save(DB_FILE);
-        LocalDate date = LocalDate.of(2019, 3, 27);
+        LocalDate date = LocalDate.of(2019, 4, 20);
         List<Fruit> addedFruits = tradeShop.getAddedFruits(date);
         assertEquals(listFruits2.size(), addedFruits.size());
         for (int i = 0; i < addedFruits.size(); i++) {
@@ -123,8 +119,7 @@ public class TradeShopTest {
         tradeShop.save(DB_FILE);
         LocalDate date = LocalDate.of(2019, 3, 25);
         List<Fruit> addedFruits = tradeShop.getAddedFruits(date, TypeFruit.BANANA);
-        assertEquals(2, addedFruits.size());
+        assertEquals(1, addedFruits.size());
         assertEquals(addedFruits.get(0), listFruits1.get(1));
-        assertEquals(addedFruits.get(1), listFruits1.get(3));
-    }
+        }
 }
