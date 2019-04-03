@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -32,10 +33,11 @@ public class FileContent {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             Type fruitListType = new TypeToken <ArrayList <Fruit>>() {
             }.getType();
-            GSON.fromJson(bufferedReader, fruitListType);
+            return GSON.fromJson(bufferedReader, fruitListType);
         } catch (IOException e) {
             LOGGER.warning(e.getMessage());
         }
-        return new ArrayList <>();
+        //return new ArrayList (0);
+        return Collections.EMPTY_LIST;
     }
 }
