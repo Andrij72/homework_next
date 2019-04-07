@@ -53,7 +53,7 @@ public class MyTubeParser {
             videoCommentsListResponse = youtube.commentThreads().list("snippet")
                     .setVideoId(videoId).setTextFormat("plainText").execute();
         } catch (IOException e) {
-            LOGGER.info(e.getMessage());
+            LOGGER.warn(e.getMessage());
         }
         return videoCommentsListResponse.getItems();
     }
